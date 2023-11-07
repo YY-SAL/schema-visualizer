@@ -8,7 +8,9 @@ updates:
   - package-ecosystem: "bundler" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "weekly"
+      interval: "daily"
+      time: "23:40"
+      timezone: "Asia/Tokyo"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-patch"]
