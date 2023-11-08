@@ -8,3 +8,4 @@ gem "pg"
 gem "puma"
 gem "bootsnap", require: false
 gem 'rack-cors'
+gem 'rubocop', '>=1.4'
