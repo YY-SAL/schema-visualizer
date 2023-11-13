@@ -16,6 +16,8 @@ jobs:
           docker-compose -f backend/docker-compose.yml run --rm web bundle exec rails db:drop db:create db:schema:load RAILS_ENV=test
       - name: Run test
         run: docker-compose -f backend/docker-compose.yml run --rm web bundle exec rails test
+      - name: Echo hello
+        run: echo hello
   rubocop:
     runs-on: ubuntu-latest
     steps:
