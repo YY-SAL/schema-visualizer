@@ -1,0 +1,38 @@
+name: Build
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Build docker image
+        run: docker-compose -f backend/docker-compose.yml build
+      - name: Prepare db container
+        run: docker-compose -f backend/docker-compose.yml up -d db
+      - name: Prepare test db
+        run: |
+          docker-compose -f backend/docker-compose.yml run --rm web bundle exec rails db:drop db:create db:schema:load RAILS_ENV=test
+      - name: Run test
+        run: docker-compose -f backend/docker-compose.yml run --rm web bundle exec rails test
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Build docker image
+        run: docker-compose -f backend/docker-compose.yml build
+      - name: Run rubocop
+        run: docker-compose -f backend/docker-compose.yml run --rm web bundle exec rubocop
