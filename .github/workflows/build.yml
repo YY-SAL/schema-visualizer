@@ -36,3 +36,8 @@ jobs:
         run: docker-compose -f $DOCKER_COMPOSE_PATH build
       - name: Run rubocop
         run: docker-compose -f $DOCKER_COMPOSE_PATH run --rm web bundle exec rubocop
+  hoge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hoge
+        run: echo Hoge
