@@ -7,6 +7,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Build docker image
         run: docker-compose -f backend/docker-compose.yml build
       - name: Prepare db container
@@ -21,6 +23,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Build docker image
         run: docker-compose -f backend/docker-compose.yml build
       - name: Run rubocop
