@@ -130,7 +130,7 @@ GEM
     prism (1.5.1)
     psych (5.1.2)
       stringio
-    puma (6.6.0)
+    puma (7.1.0)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.16)
